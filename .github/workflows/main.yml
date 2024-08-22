@@ -1,7 +1,7 @@
 name: Trigger auto deployment for demo-container
 
 env:
-  # !!!! UPDATE THESE VARIABLE BELOW !!!!
+  # !!! UPDATE THESE VARIABLE BELOW !!!
   DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
   DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
@@ -47,12 +47,12 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ghcr.io/${{ env.REPO }}:${{ github.sha }}
-          file: ./Dockerfile
+          tags: ghcr.io/${{ github.repository }}/week-4-cloud-deployment-iaravagni:${{ github.sha }}
+          file: ./Dockerfile 
 
       - name: Build and push container image to Docker Hub
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.REPO }}:${{ github.sha }}
+          tags: docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/week-4-cloud-deployment-iaravagni:${{ github.sha }}
           file: ./Dockerfile
